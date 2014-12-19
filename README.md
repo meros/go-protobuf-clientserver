@@ -7,3 +7,4 @@ This is a simple client and server that uses protocol buffers frame delimeted by
 * server - listens on 8080 and receives, prints, packets
 * protocol - the common protocol
 * protocoder - common functionality to decode/encode packets
+* connchan - channel with incoming connections
