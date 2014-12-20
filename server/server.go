@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/golang/protobuf/proto"
 	"github.com/meros/go-protobuf-clientserver/connchan"
 	"github.com/meros/go-protobuf-clientserver/protocoder"
 	"github.com/meros/go-protobuf-clientserver/protocol"
@@ -11,16 +12,24 @@ import (
 func handleConnection(conn net.Conn) {
 	defer conn.Close()
 
+	packetReader := protocoder.NewPacketReader(conn)
+	packetWriter := protocoder.NewPacketWriter(conn)
+
+	req := new(protocol.Req)
+	resp := new(protocol.Resp)
+
 	for {
-		packet := &protocol.Packet{}
-		err := protocoder.ReadPacket(conn, packet)
+		err := packetReader.Read(req)
 
 		if err != nil {
-			fmt.Println("No more data on socket!")
+			fmt.Println("Failed to read packet!")
 			return
 		}
 
-		fmt.Println("Got packet with TestString: ", packet.GetTestString())
+		resp.CalcSum = &protocol.Resp_CalcSum{
+			Sum: proto.Int32(req.GetCalcSum().GetA() + req.GetCalcSum().GetB())}
+
+		packetWriter.Write(resp)
 	}
 }
 

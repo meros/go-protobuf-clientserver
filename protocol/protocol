@@ -1,3 +1,16 @@
-message Packet {
-  optional string testString = 1;
+message Req {
+  message CalcSum {
+    required int32 a = 1;
+    required int32 b = 2;
+  }
+
+  optional CalcSum calcSum = 1;
+}
+
+message Resp {
+  message CalcSum {
+    required int32 sum = 1;
+  }
+
+  optional CalcSum calcSum = 1;
 }

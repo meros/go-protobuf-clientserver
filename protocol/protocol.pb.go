@@ -9,7 +9,8 @@ It is generated from these files:
 	protocol
 
 It has these top-level messages:
-	Packet
+	Req
+	Resp
 */
 package protocol
 
@@ -20,20 +21,76 @@ import math "math"
 var _ = proto.Marshal
 var _ = math.Inf
 
-type Packet struct {
-	TestString       *string `protobuf:"bytes,1,opt,name=testString" json:"testString,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+type Req struct {
+	CalcSum          *Req_CalcSum `protobuf:"bytes,1,opt,name=calcSum" json:"calcSum,omitempty"`
+	XXX_unrecognized []byte       `json:"-"`
 }
 
-func (m *Packet) Reset()         { *m = Packet{} }
-func (m *Packet) String() string { return proto.CompactTextString(m) }
-func (*Packet) ProtoMessage()    {}
+func (m *Req) Reset()         { *m = Req{} }
+func (m *Req) String() string { return proto.CompactTextString(m) }
+func (*Req) ProtoMessage()    {}
 
-func (m *Packet) GetTestString() string {
-	if m != nil && m.TestString != nil {
-		return *m.TestString
+func (m *Req) GetCalcSum() *Req_CalcSum {
+	if m != nil {
+		return m.CalcSum
 	}
-	return ""
+	return nil
+}
+
+type Req_CalcSum struct {
+	A                *int32 `protobuf:"varint,1,req,name=a" json:"a,omitempty"`
+	B                *int32 `protobuf:"varint,2,req,name=b" json:"b,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *Req_CalcSum) Reset()         { *m = Req_CalcSum{} }
+func (m *Req_CalcSum) String() string { return proto.CompactTextString(m) }
+func (*Req_CalcSum) ProtoMessage()    {}
+
+func (m *Req_CalcSum) GetA() int32 {
+	if m != nil && m.A != nil {
+		return *m.A
+	}
+	return 0
+}
+
+func (m *Req_CalcSum) GetB() int32 {
+	if m != nil && m.B != nil {
+		return *m.B
+	}
+	return 0
+}
+
+type Resp struct {
+	CalcSum          *Resp_CalcSum `protobuf:"bytes,1,opt,name=calcSum" json:"calcSum,omitempty"`
+	XXX_unrecognized []byte        `json:"-"`
+}
+
+func (m *Resp) Reset()         { *m = Resp{} }
+func (m *Resp) String() string { return proto.CompactTextString(m) }
+func (*Resp) ProtoMessage()    {}
+
+func (m *Resp) GetCalcSum() *Resp_CalcSum {
+	if m != nil {
+		return m.CalcSum
+	}
+	return nil
+}
+
+type Resp_CalcSum struct {
+	Sum              *int32 `protobuf:"varint,1,req,name=sum" json:"sum,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *Resp_CalcSum) Reset()         { *m = Resp_CalcSum{} }
+func (m *Resp_CalcSum) String() string { return proto.CompactTextString(m) }
+func (*Resp_CalcSum) ProtoMessage()    {}
+
+func (m *Resp_CalcSum) GetSum() int32 {
+	if m != nil && m.Sum != nil {
+		return *m.Sum
+	}
+	return 0
 }
 
 func init() {
