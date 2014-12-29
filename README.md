@@ -8,3 +8,6 @@ This is a simple client and server that uses protocol buffers frame delimeted by
 * protocol - the common protocol
 * protocoder - common functionality to decode/encode packets
 * connchan - channel with incoming connections
+
+Status:
+Done. This is an example project, unlikely to turn into anything else.
