@@ -9,5 +9,6 @@ This is a simple client and server that uses protocol buffers frame delimeted by
 * protocoder - common functionality to decode/encode packets
 * connchan - channel with incoming connections
 
-Status:
+Status
+---
 Done. This is an example project, unlikely to turn into anything else.
